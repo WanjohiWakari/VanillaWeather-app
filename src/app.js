@@ -38,12 +38,20 @@ function displayTemparature(response){
    );//seting alt text as description
 
 }
+function search (city){ //makes Ajax call
+  let apiKey="b42d2c4be99c58640c37a2d33565fcbe";
+ let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayTemparature);
+}
+function handleSubmit(event) //to receive and event (eventListener always has an event)
+{
+  event.preventDefault(); //prevent page from reloading
+let cityInputElement=document.querySelector("#city-input");
+search(cityInputElement.value);
+console.log(cityInputElement);
+}
 
-
-let apiKey="b42d2c4be99c58640c37a2d33565fcbe";
-let city="New York"
-let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
-axios.get(apiUrl).then(displayTemparature);
-
+search("Nairobi") // calling funtion New York will be the default city
+let form = document.querySelector("#search-form");
+form.addEventListener("submit",handleSubmit);
  
